@@ -13,6 +13,18 @@ body {
   min-height: 100vh;
 }
 
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  flex: 1;
+
+}
+
 .main {
   flex: 1;
 }
@@ -74,7 +86,7 @@ body {
 }
 
 .hero {
-  background-image: url('../img/bank-tree.jpeg');
+  background-image: url('src/assets/img/bank-tree.jpeg');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -147,6 +159,7 @@ body {
 .feature-item {
   flex: 1;
   padding: 2.5rem;
+  list-style-type: none;
 }
 
 .feature-item-title {
