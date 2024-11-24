@@ -10,7 +10,7 @@ const Home = () => {
         <div>
             <Banner />
             <ul className='features'>
-                <h2 class="sr-only">Features</h2>
+                <h2 className="sr-only">Features</h2>
                 {
                     AboutList.map((card, index) => (
                         <Card

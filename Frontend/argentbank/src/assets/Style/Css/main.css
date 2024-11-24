@@ -86,22 +86,31 @@ main {
 }
 
 .hero {
-  background-image: url('src/assets/img/bank-tree.jpeg');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
   height: 300px;
   position: relative;
+
+  display: flex;
+  justify-content: center;
+}
+
+.BannerCover {
+  height: 400px;
+  width: 100vw;
+  object-fit: cover;
+  object-position: 0% 33%;
 }
 
 .hero-content {
-  position: relative;
-  top: 2rem;
-  width: 200px;
+  position: absolute;
+  top: 50px;
+  width: 300px;
+  margin: 2rem 0;
   background: white;
   padding: 2rem;
   text-align: left;
-  margin: 0 auto;
 }
 
 .hero-content .subtitle {
@@ -141,11 +150,18 @@ main {
 .features {
   display: flex;
   flex-direction: column;
+  padding: 0;
 }
 
 @media (min-width: 920px) {
   .features {
     flex-direction: row;
+  }
+}
+
+@media (max-width: 920px) {
+  .BannerCover {
+    height: 300px;
   }
 }
 
@@ -304,4 +320,80 @@ main {
   .transaction-button {
     width: 200px;
   }
+}
+
+/* MODAL + FORM USERNAME */
+
+.modalback {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+/* .modal {
+  background: #ffffff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+}
+
+#fermermodale {
+  background: none;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #333;
+} */
+/* 
+#fermermodale:hover {
+  color: #ff0000;
+} */
+
+.username {
+  display: flex;
+  flex-direction: column;
+}
+
+.username label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.username input[type="text"] {
+  width: 20%;
+  margin: auto;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.username input[type="submit"] {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  width: 30%;
+  margin: auto;
 }
