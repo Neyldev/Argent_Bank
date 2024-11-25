@@ -14,7 +14,7 @@ import { userSelector } from '@/Redux/Selectors/userSelector';
 const Header = () => {
 
 
-    const { firstName } = useSelector(userSelector);
+    const { userName } = useSelector(userSelector);
 
     const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const Header = () => {
                         <NavLink className="main-nav-item" to="/auth/user">
                             <i className="fa fa-user-circle"></i>
                             &nbsp;
-                            {firstName}
+                            {userName}
                         </NavLink>
                         <NavLink className="main-nav-item" onClick={logout} to="/home">
                             <i className="fa fa-sign-out"></i>

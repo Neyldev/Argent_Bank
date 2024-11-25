@@ -1,41 +1,61 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-const AccountHeader = ({ name, nom, prenom }) => {
-    const prenomRef = useRef();
+const AccountHeader = ({ name, nom, prenom, username }) => {
+    const userNameRef = useRef();
     const dispatch = useDispatch();
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     const ButtonClick = () => {
-        const FirstNameUpdated = prenomRef.current.value;
+        const userNameUpdated = userNameRef.current.value;
 
-        if (FirstNameUpdated === "") {
-            alert("Merci de saisir un Prénom");
+        if (userNameUpdated === "") {
+            alert("Please enter a username");
             return;
         }
 
         dispatch({
             type: "User/setUserProfile",
             payload: {
-                firstName: FirstNameUpdated,
+                userName: userNameUpdated,
+                firstName: prenom,
                 lastName: nom,
             },
         });
+    };
 
+    const toggleFormVisibility = () => {
+        setIsFormVisible(!isFormVisible);
     };
 
     return (
         <div>
             <div className="header">
-                <h1>Welcome back<br />{name}!</h1>
+                <h1>
+                    Welcome back<br />{name}!
+                </h1>
 
-                <form className='username'>
-                    <input type="text" name="Prénom" id="Prénom" placeholder={prenom} ref={prenomRef} />
-                    <input type="text" name="Nom" id="Nom" placeholder={nom} disabled />
-                </form>
+                <div className="test">
 
-                <button className="edit-button" onClick={ButtonClick}>
-                    Edit Name
-                </button>
+                    {isFormVisible && (
+                        <>
+                            <form className="username">
+                                <input type="text" name="userName" id="userName" placeholder={username} ref={userNameRef} />
+                                <input type="text" name="Prenom" id="Prénom" placeholder={prenom} disabled />
+                                <input type="text" name="Nom" id="Nom" placeholder={nom} disabled />
+                            </form>
+                        </>
+                    )}
+
+                    <div className="buttons-container">
+                        {isFormVisible && (
+                            <button className="edit-button" onClick={ButtonClick}>Send Edit</button>
+                        )}
+                        <button className="edit-button" onClick={toggleFormVisibility}>
+                            {isFormVisible ? "Cancel Edit" : "Edit Name"}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );

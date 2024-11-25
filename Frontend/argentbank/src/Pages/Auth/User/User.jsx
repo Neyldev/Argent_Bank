@@ -10,7 +10,7 @@ import { userSelector } from '@/Redux/Selectors/userSelector';
 import { accountService } from '@/_Services/accountService';
 
 const User = () => {
-    const { firstName, lastName } = useSelector(userSelector);
+    const { firstName, lastName, userName } = useSelector(userSelector);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,6 +31,7 @@ const User = () => {
             payload: {
                 firstName: decodedToken.firstName,
                 lastName: decodedToken.lastName,
+                userName: decodedToken.userName,
             },
         });
     };
@@ -41,6 +42,7 @@ const User = () => {
                 name={`${firstName} ${lastName}`}
                 prenom={firstName}
                 nom={lastName}
+                username={userName}
             />
             <h2 className="sr-only">Accounts</h2>
             {
