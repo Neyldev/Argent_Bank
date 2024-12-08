@@ -65,11 +65,11 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
+      produces:
+        - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -81,7 +81,7 @@ paths:
         - Bearer: []
       tags:
         - User Module
-      summary: User Profile API
+      summary: Update User Profile API
       description: API for updating a user profile
       parameters:
         - in: body
@@ -94,13 +94,113 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile updated successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  
+  /user/{userId}/account/{accountId}/monthly:
+    get:
+      summary: Obtenir les transactions du mois en cours par compte
+      description: Retourne une liste de toutes les transactions du mois en cours, regroupées par compte.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          type: string
+          description: ID de l'utilisateur.
+        - name: accountId
+          in: path
+          required: true
+          type: string
+          description: ID du compte.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transactions récupérées avec succès.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '400':
+          description: Paramètre accountId invalide.
+        '404':
+          description: Aucune transaction trouvée pour l'accountId donné.
+  /user/{userId}/account/{accountId}/transactions/{transactionId}:
+    get:
+      summary: Obtenir les détails d'une transaction spécifique
+      description: Retourne des informations détaillées sur une transaction spécifique.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          type: string
+          description: ID de l'utilisateur.
+        - name: accountId
+          in: path
+          required: true
+          type: string
+          description: ID du compte.
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID de la transaction.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Détails de la transaction récupérés avec succès.
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Paramètre transactionId invalide.
+        '404':
+          description: Transaction non trouvée.
+    patch:
+      summary: Mettre à jour partiellement une transaction spécifique
+      description: Permet de mettre à jour certaines propriétés d'une transaction spécifique.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          type: string
+          description: ID de l'utilisateur.
+        - name: accountId
+          in: path
+          required: true
+          type: string
+          description: ID du compte.
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID de la transaction.
+        - in: body
+          name: body
+          description: Données à mettre à jour pour la transaction.
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction mise à jour avec succès.
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Données invalides ou paramètre transactionId invalide.
+        '404':
+          description: Transaction non trouvée.
+        '500':
+          description: Erreur interne du serveur.
+
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -108,6 +208,7 @@ securityDefinitions:
     in: header
 definitions:
   User:
+    type: object
     properties:
       email:
         type: string
@@ -125,6 +226,7 @@ definitions:
         type: string
         description: user public name
   Login:
+    type: object
     properties:
       email:
         type: string
@@ -156,3 +258,54 @@ definitions:
     properties:
       userName:
         type: string
+  Account:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Identifiant unique du compte.
+      name:
+        type: string
+        description: Nom du compte.
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Identifiant unique de la transaction.
+      accountId:
+        type: string
+        description: Identifiant du compte associé à la transaction.
+      date:
+        type: string
+        format: date
+        description: Date de la transaction.
+      description:
+        type: string
+        description: Description de la transaction.
+      amount:
+        type: number
+        format: float
+        description: Montant de la transaction.
+      balance:
+        type: number
+        format: float
+        description: Solde du compte après la transaction.
+      transactionType:
+        type: string
+        description: Type de la transaction.
+      category:
+        type: string
+        description: Catégorie de la transaction.
+      note:
+        type: string
+        description: Notes supplémentaires.
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+        description: Catégorie mise à jour.
+      note:
+        type: string
+        description: Note mise à jour.

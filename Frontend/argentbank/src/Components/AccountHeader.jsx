@@ -49,10 +49,10 @@ const AccountHeader = ({ name, nom, prenom, username }) => {
 
                     <div className="buttons-container">
                         {isFormVisible && (
-                            <button className="edit-button" onClick={ButtonClick}>Send Edit</button>
+                            <button className="edit-button" onClick={ButtonClick}>Save</button>
                         )}
                         <button className="edit-button" onClick={toggleFormVisibility}>
-                            {isFormVisible ? "Cancel Edit" : "Edit Name"}
+                            {isFormVisible ? "Close" : "Edit Name"}
                         </button>
                     </div>
                 </div>

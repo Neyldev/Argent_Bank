@@ -1,8 +1,0 @@
---- 1st Terminal ---
-cd backend 
-npm run dev:server
-
-
---- 2nd Terminal ---
-cd .\Frontend\argentbank\
-npm run start
