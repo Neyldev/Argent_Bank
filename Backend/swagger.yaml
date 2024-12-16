@@ -199,6 +199,37 @@ paths:
           description: Transaction non trouvée.
         '500':
           description: Erreur interne du serveur.
+          
+    delete:
+      summary: Supprimer des informations sur une transaction
+      description: Supprime certaines informations (comme une note ou une catégorie) d'une transaction existante, mais ne permet pas la suppression d'une transaction.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          type: string
+          description: ID de l'utilisateur.
+        - name: accountId
+          in: path
+          required: true
+          type: string
+          description: ID du compte.
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID de la transaction.
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: Informations supprimées avec succès.
+        '400':
+          description: Paramètre transactionId ou données invalides.
+        '404':
+          description: Transaction non trouvée.
+        '500':
+          description: Erreur interne du serveur.
 
 
 securityDefinitions:

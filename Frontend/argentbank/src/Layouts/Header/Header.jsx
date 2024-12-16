@@ -16,7 +16,7 @@ const Header = () => {
 
     const { userName } = useSelector(userSelector);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     let logout = () => {
         accountService.logout();
