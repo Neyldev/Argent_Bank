@@ -130,6 +130,8 @@ paths:
           description: Paramètre accountId invalide.
         '404':
           description: Aucune transaction trouvée pour l'accountId donné.
+        '500':
+           description: Erreur interne du serveur.
   /user/{userId}/account/{accountId}/transactions/{transactionId}:
     get:
       summary: Obtenir les détails d'une transaction spécifique
@@ -161,6 +163,8 @@ paths:
           description: Paramètre transactionId invalide.
         '404':
           description: Transaction non trouvée.
+        '500':
+           description: Erreur interne du serveur.
     patch:
       summary: Mettre à jour partiellement une transaction spécifique
       description: Permet de mettre à jour certaines propriétés d'une transaction spécifique.
